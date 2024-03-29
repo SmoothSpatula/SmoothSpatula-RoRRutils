@@ -6,7 +6,7 @@ gm.pre_script_hook(gm.constants.__input_system_tick, function()
 
     if not custom_init then
         custom_init = true
-         
+        --[[
         diff_id = gm.difficulty_create("klehrik", "deluge")   -- namespace, identifier
         local class_diff = gm.variable_global_get("class_difficulty")[diff_id + 1]
         local values = {
@@ -28,10 +28,7 @@ gm.pre_script_hook(gm.constants.__input_system_tick, function()
             true            -- Whichever one the bool above isn't
         }
         for i = 2, 12 do gm.array_set(class_diff, i, values[i - 1]) end
-
-        
-
-        
+        ]]--       
 
         surv_id = gm.survivor_create("SmoothSpatula", "survivor_test")
         local class_surv = gm.variable_global_get("class_survivor")[surv_id + 1]
