@@ -31,8 +31,8 @@ function print_struct(struct, depth)
     end
 end
 
-function print_array(args, depth)
-    if #args < 1 then print("empty args") end
+function print_array(array, depth)
+    if #array < 1 then print("empty array") end
     if depth > max_depth then 
         print(struct) 
         return false
@@ -41,9 +41,9 @@ function print_array(args, depth)
     local arg = nil
     local current_tab_str = string.rep(tab_str, depth)
     local line_start = nil
-    for i=1, #args do 
+    for i=1, #array do 
         line_start = current_tab_str .. "[" ..i.."] = "
-        arg = args[i].value
+        arg = array[i].value
         if tostring(arg):match("CInstance") then
             print(line_start .. arg.object_name .. "instance")
         elseif tostring(arg):match("sol%.std::span<RValue %*,%-1>") ~= nil then
@@ -57,3 +57,4 @@ function print_array(args, depth)
         end
     end
 end
+
