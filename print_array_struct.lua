@@ -45,7 +45,7 @@ function print_array(array, depth)
         line_start = current_tab_str .. "[" ..i.."] = "
         arg = array[i].value
         if tostring(arg):match("CInstance") then
-            print(line_start .. arg.object_name .. "instance")
+            print(line_start .. arg.object_name .. " ( instance ) ")
         elseif tostring(arg):match("sol%.std::span<RValue %*,%-1>") ~= nil then
             print(line_start .. " array of size " .. #arg)
             print_array(arg, depth + 1)
