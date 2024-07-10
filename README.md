@@ -4,6 +4,8 @@
 
 * hardcoded.lua has many function definitions and classes
 
+* print_args lets you print an array recursively (could be bugged, implemented it like a monkey)
+
 * other files are misc
 
 ## Useful links
