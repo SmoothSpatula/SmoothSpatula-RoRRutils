@@ -5,24 +5,23 @@ function print_struct(struct, depth)
         print(struct) 
         return false
     end
-    depth = depth + 1
     local names = gm.struct_get_names(struct)
     local arg = nil
     local current_tab_str = string.rep(tab_str, depth)
     local line_start = nil
     for j=1, #names do 
         arg = struct[names[j]]
-        line_start = current_tab_str.. j .. " - " .. names[j]
+        line_start = current_tab_str.. j .." - ".. names[j]
         if tostring(arg):match("CInstance") then
             print(line_start .. arg.object_name .. " ( instance )")
         elseif tostring(arg):match("sol%.std::span<RValue %*,%-1>") ~= nil then
-            print(line_start .. " ( array of size " .. #arg .. " )")
-            print_array(arg, depth)
+            print(line_start .." ( array of size ".. #arg .." )")
+            print_array(arg, depth + 1)
         elseif gm.typeof(arg) == "struct" then 
-            print(line_start .. " struct :")
-            print_struct(arg, depth)
+            print(line_start .." struct :")
+            print_struct(arg, depth + 1)
         else
-            print(line_start .. " = " .. tostring(arg) ..  " ( " .. tostring(gm.typeof(arg)) .. " )")
+            print(line_start .." = ".. tostring(arg) .." ( ".. tostring(gm.typeof(arg)) .." )")
         end
         
         if gm.typeof(arg) == "Struct" then 
@@ -37,24 +36,22 @@ function print_array(array, depth)
         print(struct) 
         return false
     end
-    depth = depth + 1
     local arg = nil
     local current_tab_str = string.rep(tab_str, depth)
     local line_start = nil
     for i=1, #array do 
-        line_start = current_tab_str .. "[" ..i.."] = "
+        line_start = current_tab_str .."[" ..i.."] = "
         arg = array[i].value
         if tostring(arg):match("CInstance") then
             print(line_start .. arg.object_name .. "instance")
         elseif tostring(arg):match("sol%.std::span<RValue %*,%-1>") ~= nil then
-            print(line_start .. " array of size " .. #arg)
-            print_array(arg, depth)
+            print(line_start .." array of size ".. #arg)
+            print_array(arg, depth + 1)
         elseif gm.typeof(arg) == "struct" then 
-            print(line_start .. "struct :")
-            print_struct(arg, depth)
+            print(line_start .."struct :")
+            print_struct(arg, depth + 1)
         else
-            print(line_start ..  tostring(arg) .. " ( " .. tostring(gm.typeof(arg)) .. " )")
+            print(line_start ..  tostring(arg) .." ( ".. tostring(gm.typeof(arg)) .." )")
         end
     end
 end
-
