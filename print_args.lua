@@ -8,15 +8,16 @@ function print_struct(struct, depth)
     depth = depth + 1
     local names = gm.struct_get_names(struct)
     local arg = nil
+    local current_tab_str = string.rep(tab_str, depth)
     for j=1, #names do 
         arg = struct[names[j]]
         if tostring(arg):match("CInstance") then
-            print(string.rep(tab_str, depth) .. j .. " " .. names[j] .. arg.object_name .. " ( instance )")
+            print(current_tab_str .. j .. " " .. names[j] .. arg.object_name .. " ( instance )")
         elseif gm.typeof(arg) == "struct" then 
-            print(string.rep(tab_str, depth) .. j .. " " .. names[j] .. " struct :")
+            print(current_tab_str .. j .. " " .. names[j] .. " struct :")
             print_struct(arg, depth)
         else
-            print(string.rep(tab_str, depth) .. j .. " " .. names[j] .. " = " .. tostring(arg) ..  " ( " .. tostring(gm.typeof(arg)) .. " )")
+            print(current_tab_str .. j .. " " .. names[j] .. " = " .. tostring(arg) ..  " ( " .. tostring(gm.typeof(arg)) .. " )")
         end
         
         if gm.typeof(arg) == "Struct" then 
