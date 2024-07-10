@@ -35,7 +35,7 @@ function print_array(array, depth)
     if #array < 1 then print("empty array") end
     if depth == nil then depth = 0 end
     if depth > max_depth then 
-        print(struct) 
+        print(array) 
         return false
     end
     local arg = nil
