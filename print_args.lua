@@ -1,6 +1,7 @@
 local tab_str = "   "
+local max_depth = 3
 function print_struct(struct, depth)
-    if depth > 3 then 
+    if depth > max_depth then 
         print(struct) 
         return false
     end
